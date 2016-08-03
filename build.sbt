@@ -33,6 +33,7 @@ val compileDependencies = Seq(
   "uk.gov.hmrc" %% "play-health" % "1.1.0",
   "uk.gov.hmrc" %% "play-json-logger" % "2.1.1",
   "uk.gov.hmrc" %% "play-partials" % "4.2.0",
+  "uk.gov.hmrc" %% "play-whitelist-filter" % "1.1.0",
   "org.apache.httpcomponents" % "httpclient" % "4.5.2",
   "org.apache.httpcomponents" % "httpcore" % "4.4.1",
   "com.kenshoo" %% "metrics-play" % "2.3.0_0.1.8"

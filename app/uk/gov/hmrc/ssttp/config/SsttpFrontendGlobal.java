@@ -18,11 +18,13 @@ package uk.gov.hmrc.ssttp.config;
 
 import play.GlobalSettings;
 import play.Logger;
+import play.api.mvc.EssentialFilter;
 import play.i18n.Messages;
 import play.libs.F.Promise;
 import play.mvc.Http.RequestHeader;
 import play.mvc.Result;
 import play.twirl.api.Html;
+import uk.gov.hmrc.ssttp.filters.WhitelistFilter;
 
 import static java.lang.String.format;
 import static play.libs.F.Promise.pure;
@@ -49,5 +51,11 @@ public class SsttpFrontendGlobal extends GlobalSettings {
     public Promise<Result> onError(RequestHeader rh, Throwable t) {
         Logger.error(t.getMessage(), t);
         return pure(internalServerError(standardErrorTemplate(INTERNAL_SERVER_ERROR)));
+    }
+
+    @Override
+    public <T extends EssentialFilter> Class<T>[] filters() {
+        //noinspection unchecked
+        return new Class[] { WhitelistFilter.class };
     }
 }
