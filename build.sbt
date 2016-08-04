@@ -2,7 +2,6 @@ import de.heikoseeberger.sbtheader.license.Apache2_0
 import uk.gov.hmrc.HeaderSettings
 
 name := "self-service-time-to-pay-frontend"
-crossPaths := false
 autoScalaLibrary := false
 
 testFrameworks := Seq(TestFrameworks.JUnit)
