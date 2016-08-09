@@ -23,6 +23,7 @@ import scala.concurrent.Future;
 import uk.gov.hmrc.whitelist.AkamaiWhitelistFilter;
 import uk.gov.hmrc.whitelist.AkamaiWhitelistFilter$class;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,7 +39,7 @@ public class WhitelistFilter implements AkamaiWhitelistFilter {
 
     public WhitelistFilter() {
         enabled = getBoolean("filter.whitelist.enabled");
-        whitelist = getStringList("filter.whitelist.ips");
+        whitelist = Arrays.asList(getString("filter.whitelist.ips").split(","));
         destination = toCall(getString("filter.whitelist.destination"));
         excludedPaths = getStringList("filter.whitelist.exclusions").stream().map(WhitelistFilter::toCall).collect(Collectors.toList());
     }
