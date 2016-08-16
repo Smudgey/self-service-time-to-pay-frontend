@@ -1,0 +1,40 @@
+@****************************************
+*
+* Render a set of radiobuttons using the HMRC Compnent Library Styles
+* http://hmrc.github.io/assets-frontend/section-form.html
+* http://hmrc.github.io/assets-frontend/section-radio-input.html
+*                                       *
+* @param field Field the form field to bind to
+* @param optionsList Seq[(String, String)] Options to display for the field mapping value to label
+* @param args Additional parameters:
+*    '_modifierClass -> Modifier class to apply to whole input div, can be one of [-tall, -single, --inline, --inline-text-input, --inline-spaced-right, --inline-spaced-left ]
+*    '_labelClass -> class to add to the label element as per http://hmrc.github.io/assets-frontend/section-label.html
+*    '_inputClass -> Class to add to the input element
+* @param content Html the code used for the title of the radiobuttons if any
+*************************************@
+@(field: Field, optionsList: Seq[(String, String)], args:(Symbol, Any)*)(content: Html)
+
+
+@import play.api.i18n._
+@import views.html.helper._
+
+@elements = @{ new FieldElements(field.id, field, null, args.toMap, lang) }
+@fieldValue = @{ field.value match { case Some(x) => x case None => "" case x => x }}
+
+<fieldset@if( elements.args.get('_modifierClass) ){ class="@elements.args.get('_modifierClass)"}>
+@content
+<div class="form-field@if(elements.args.get('_modifierClass)){@elements.args.get('_modifierClass)}">
+    @elements.errors.map{error => <span class="error-notification">@Messages(error)</span>}
+    @optionsList.map { case (value, label) =>
+        @defining(s"${elements.field.name}-${value.toLowerCase.replace(" ","_")}") { inputId =>
+            <label class="@if(elements.args.get('_labelClass)){ @elements.args.get('_labelClass)}" for="@inputId">
+                <input type="radio" id="@inputId"
+                   @if(elements.args.get('_inputClass)){ class="@elements.args.get('_inputClass)" }
+                    name="@elements.field.name" value="true" @if(fieldValue==value){checked="checked"}/>@label
+            </label>
+        }
+    }
+</div>
+</fieldset>
+
+

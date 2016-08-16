@@ -16,14 +16,13 @@
 
 package uk.gov.hmrc.ssttp.controllers;
 
-import play.mvc.Controller;
+import play.libs.F;
 import play.mvc.Result;
+import uk.gov.hmrc.play.java.frontend.controller.FrontendController;
 import views.html.landing;
 
-public class LandingController extends Controller {
-
-    public static Result landing() {
-        return ok(landing.render(""));
+public class LandingController extends FrontendController {
+    public static F.Promise<Result> landing() {
+        return F.Promise.pure(ok(landing.render("")));
     }
-
 }

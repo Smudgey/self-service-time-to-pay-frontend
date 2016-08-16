@@ -1,0 +1,11 @@
+@****************************************
+* Submit button                          *
+*                                       *
+* @param message The message to display *
+*************************************@
+
+@(label: String, args: (Symbol, String)*)
+@argsMap = @{ args.toMap }
+<div class="form-field form-field--submit@if(argsMap.get('_modifierClass)){ @argsMap.get('_modifierClass)}">
+    <button class="button@if(argsMap.get('_buttonClass)){ @argsMap.get('_buttonClass)}" type="submit">@label</button>
+</div>

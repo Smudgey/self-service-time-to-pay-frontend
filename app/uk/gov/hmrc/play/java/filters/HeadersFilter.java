@@ -14,18 +14,14 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ssttp.config;
+package uk.gov.hmrc.play.java.filters;
 
-import org.apache.commons.lang3.ArrayUtils;
-import play.api.mvc.EssentialFilter;
-import uk.gov.hmrc.play.java.filters.WhitelistFilter;
-import uk.gov.hmrc.play.java.frontend.bootstrap.DefaultFrontendGlobal;
+import play.api.mvc.*;
+import uk.gov.hmrc.play.filters.frontend.HeadersFilter$;
 
-public class SsttpFrontendGlobal extends DefaultFrontendGlobal {
-
-    @SuppressWarnings("unchecked")
+public class HeadersFilter implements EssentialFilter {
     @Override
-    public <T extends EssentialFilter> Class<T>[] filters() {
-        return ArrayUtils.addAll(new Class[] {WhitelistFilter.class}, super.filters());
+    public EssentialAction apply(EssentialAction nextAction) {
+        return HeadersFilter$.MODULE$.apply(nextAction);
     }
 }

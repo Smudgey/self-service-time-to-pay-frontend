@@ -1,0 +1,13 @@
+@*
+ Create a fieldset element enclosing the given content
+
+ @param _modifierClass CSS class to add to the fieldset element including:
+        connected, dynamically-displayed and form-field-group
+*@
+@(args:(Symbol, Any)*)(content: Html)
+@import play.api.i18n._
+@import views.html.helper._
+@argsMap = @{args.toMap }
+<fieldset @if(argsMap.get('_modifierClass)){class="@argsMap.get('_modifierClass)"}>
+    @content
+</fieldset>

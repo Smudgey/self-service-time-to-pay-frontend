@@ -1,0 +1,30 @@
+@****************************************
+*
+* Render a checkbox using the HMRC Compnent Library Styles
+* http://hmrc.github.io/assets-frontend/section-form.html
+*                                       *
+* @param field Field the form field to bind to
+* @param label Option[Label] to display for the field (Optional, if None then no label will be shown)
+* @param args Additional parameters:
+*    '_modifierClass -> Modifier class to apply to whole input div, can be one of [-tall, -single, --inline, --inline-text-input, --inline-spaced-right, --inline-spaced-left ]
+*    '_labelClass -> class to add to the label element as per http://hmrc.github.io/assets-frontend/section-label.html
+*    '_inputClass -> Class to add to the input element
+*************************************@
+@(field: Field, label: Option[Html], args:(Symbol, Any)*)
+
+
+@import play.api.i18n._
+@import views.html.helper._
+
+@elements = @{ new FieldElements(field.id, field, null, args.toMap, lang) }
+@value = @{ field.value match { case Some(x) => x case None => "false" case x => x }}
+<div class="form-field@if(elements.args.get('_modifierClass)){@elements.args.get('_modifierClass)}">
+    @elements.errors(elements.lang).map { error =>
+    <span style="display: block" class="error-notification">@Messages(error)</span>
+    }
+    <label class="@if(elements.args.get('_labelClass)){ @elements.args.get('_labelClass)}" for="@elements.id">
+        <input type="checkbox" id="@elements.id"
+           @if( elements.args.get('_inputClass) ){ class="@elements.args.get('_inputClass)" }
+            name="@elements.field.name" value="true" @if(value=="true"){checked="checked"}/>@label.get
+    </label>
+</div>

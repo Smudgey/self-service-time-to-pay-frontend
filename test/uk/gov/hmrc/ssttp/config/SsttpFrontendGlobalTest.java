@@ -16,10 +16,17 @@
 
 package uk.gov.hmrc.ssttp.config;
 
+import org.junit.Before;
 import org.junit.Test;
+import play.api.mvc.EssentialFilter;
 import play.i18n.Messages;
 import play.mvc.Http;
 import play.mvc.Result;
+import uk.gov.hmrc.play.java.filters.WhitelistFilter;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
@@ -31,9 +38,20 @@ public class SsttpFrontendGlobalTest extends SsttpFrontendGlobal {
     private Http.RequestHeader rh = mock(Http.RequestHeader.class);
     private int futureTimeout = 3000;
 
+    @Before
+    public void setUp() {
+        Map<String, String> flashData = Collections.emptyMap();
+        Map<String, Object> argData = Collections.emptyMap();
+        Long id = 2L;
+        play.api.mvc.RequestHeader header = mock(play.api.mvc.RequestHeader.class);
+        Http.Request request = mock(Http.Request.class);
+        Http.Context ctx = new Http.Context(id, header, request, flashData, flashData, argData);
+        Http.Context.current.set(ctx);
+    }
+
     @Test
     public void renderInternalServerError() {
-        running(fakeApplication(), () -> {
+        running(fakeApplication(this), () -> {
             Exception exception = new Exception("Runtime exception");
             Result result = onError(rh, exception).get(futureTimeout);
             assertThat(status(result), is(INTERNAL_SERVER_ERROR));
@@ -44,7 +62,7 @@ public class SsttpFrontendGlobalTest extends SsttpFrontendGlobal {
 
     @Test
     public void renderPageNotFound() {
-        running(fakeApplication(), () -> {
+        running(fakeApplication(this), () -> {
             Result result = onHandlerNotFound(rh).get(futureTimeout);
             assertThat(status(result), is(NOT_FOUND));
             assertThat(contentAsString(result), containsString("This page can’t be found"));
@@ -54,7 +72,7 @@ public class SsttpFrontendGlobalTest extends SsttpFrontendGlobal {
 
     @Test
     public void renderBadRequest() {
-        running(fakeApplication(), () -> {
+        running(fakeApplication(this), () -> {
             Result result = onBadRequest(rh, "").get(futureTimeout);
             assertThat(status(result), is(BAD_REQUEST));
             assertThat(contentAsString(result), containsString("Bad request"));
@@ -64,9 +82,16 @@ public class SsttpFrontendGlobalTest extends SsttpFrontendGlobal {
 
     @Test
     public void renderNotFoundWithServer() {
-        running(testServer(3333, fakeApplication(new SsttpFrontendGlobal())), HTMLUNIT, browser -> {
-            browser.goTo("http://localhost:3333");
-            assertThat(browser.pageSource(), containsString(Messages.get("global.error.404.title")));
+        SsttpFrontendGlobal minusWhitelist = new SsttpFrontendGlobal() {
+            @Override
+            public <T extends EssentialFilter> Class<T>[] filters() {
+                return (Class[]) Arrays.stream(super.filters()).filter(f -> !f.isAssignableFrom(WhitelistFilter.class)).toArray(size -> new Class[size]);
+            }
+        };
+
+        running(testServer(3333, fakeApplication(minusWhitelist)), HTMLUNIT, browser -> {
+            browser.goTo("http://localhost:3333/notFound").pageSource();
+            assertThat(browser.pageSource(), containsString(Messages.get("global.error.pageNotFound404.title")));
         });
     }
 }

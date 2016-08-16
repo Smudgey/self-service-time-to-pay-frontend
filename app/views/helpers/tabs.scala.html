@@ -1,0 +1,36 @@
+@*
+ Create a set of tabs in the page
+
+ @param tabs A Sequence of (String, Html) representing a tab and its content
+ @param args Additional parameters including:
+                '_modifierClass     -> a class to apply to the tab group
+                '_tabLabelClass     -> a class to apply to every tab label
+                '_tabContentClass   -> a class to apply to every tab content
+*@
+
+@(tabs: Seq[(String, Html)], args: (Symbol, String)*)
+@argsMap = @{ args.toMap }
+@selectedTabId = @{ argsMap.getOrElse('selectedTab, tabs.head._1).replace(" ","_") }
+
+<div data-tabs @if(argsMap.get('_modifierClass)){class="@argsMap.get('_modifierClass)"}>
+    <ul class="tabs-nav" role="tablist">
+        @tabs.map { case (tabLabel, content) =>
+            @defining(tabLabel.toLowerCase.replace(" ","_")) { tabId =>
+                <li id="@tabId" role="tab" data-tab-link="@tabId" aria-selected="@{if(tabId==selectedTabId) true else false}" aria-controls="@tabId-content"
+                    @if(argsMap.get('_tabLabelClass)){class="@argsMap.get('_tabLabelClass)"}>
+                    <span class="tabs-nav__tab tabs-nav__tab--active" href="#">@tabLabel</span>
+                </li>
+            }
+        }
+    </ul>
+    <ul>
+        @tabs.map { case (tabLabel, content) =>
+        @defining(tabLabel.toLowerCase.replace(" ","_")) { tabId =>
+                <li id="@tabId-content" data-tab-content="@tabId" class="tab-content" role="tabpanel" aria-labelledby="@tabId"
+                    @if(argsMap.get('_tabContentClass)){class="@argsMap.get('_tabContentClass)"}>
+                    <p class="tab-content__first">@content</p>
+                </li>
+            }
+        }
+    </ul>
+</div>

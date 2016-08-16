@@ -1,0 +1,29 @@
+@import uk.gov.hmrc.ssttp.models.EligibilityStep2Data
+
+@(dataForm: Form[EligibilityStep2Data])(implicit message: String)
+
+@import views.html.helpers._
+@import views.html.helpers.forms._
+@import uk.gov.hmrc.ssttp.controllers.routes
+@import uk.gov.hmrc.play.views.html.helpers.input
+
+@mainContent() = {
+
+<header class="page-header text">
+        <h1 class="h1-heading">@Messages("ssttp.eligibility.step_two.title")</h1>
+    </header>
+    <div class="subsection">
+        @Messages("ssttp.eligibility.step_two.intro")
+    </div>
+    @form(routes.EligibilityController.stepTwoSubmit(), 'class -> "group") {
+       input(dataForm("totalOwed"))
+       @submit(Messages("ssttp.eligibility.step_two.continue"))
+    }
+    <p>@Messages("ssttp.eligibility.step_two.back")</p>
+}
+
+@views.html.main(
+    title = Messages("ssttp.common.title"),
+    bodyClasses = None,
+    sidebarLinks = Some(landing_sidebar())
+)(mainContent)
