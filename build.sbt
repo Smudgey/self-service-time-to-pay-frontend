@@ -5,6 +5,8 @@ import play.core.PlayVersion
 name := "self-service-time-to-pay-frontend"
 autoScalaLibrary := false
 
+sources in (Compile, doc) <<= sources in (Compile, doc) map { _.filterNot(_.getName endsWith ".scala") }
+
 testFrameworks := Seq(TestFrameworks.JUnit)
 
 // [START] Temporary solution until release of new version of sbt-auto-build with junit fix
