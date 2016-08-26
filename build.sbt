@@ -26,14 +26,13 @@ SbtDistributablesPlugin.publishingSettings
 
 val compileDependencies = Seq(
   javaWs,
-  "uk.gov.hmrc" %% "frontend-bootstrap" % "6.5.0",
+  "uk.gov.hmrc" %% "frontend-bootstrap-java" % "0.3.0",
   "uk.gov.hmrc" %% "play-partials" % "4.2.0",
   "uk.gov.hmrc" %% "play-config" % "2.0.1",
   "uk.gov.hmrc" %% "play-json-logger" % "2.1.1",
   "uk.gov.hmrc" %% "govuk-template" % "4.0.0",
   "uk.gov.hmrc" %% "play-health" % "1.1.0",
   "uk.gov.hmrc" %% "play-ui" % "4.14.0",
-  "uk.gov.hmrc" %% "play-whitelist-filter" % "1.1.0",
   "org.scala-lang.modules" %% "scala-java8-compat" % "0.3.0"
 )
 

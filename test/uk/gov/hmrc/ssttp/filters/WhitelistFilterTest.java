@@ -18,7 +18,6 @@ package uk.gov.hmrc.ssttp.filters;
 
 import org.junit.Test;
 import scala.Function1;
-import uk.gov.hmrc.play.java.filters.WhitelistFilter;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

@@ -18,10 +18,17 @@ package uk.gov.hmrc.ssttp.config;
 
 import org.apache.commons.lang3.ArrayUtils;
 import play.api.mvc.EssentialFilter;
-import uk.gov.hmrc.play.java.filters.WhitelistFilter;
 import uk.gov.hmrc.play.java.frontend.bootstrap.DefaultFrontendGlobal;
+import uk.gov.hmrc.play.java.frontend.bootstrap.ShowErrorPage;
+import uk.gov.hmrc.play.java.frontend.filters.WhitelistFilter;
 
 public class SsttpFrontendGlobal extends DefaultFrontendGlobal {
+    private ShowErrorPage errorPage = (pageTitle, heading, message, request) -> views.html.error_template.render(pageTitle, heading, message);
+
+    @Override
+    protected ShowErrorPage showErrorPage() {
+        return errorPage;
+    }
 
     @SuppressWarnings("unchecked")
     @Override
