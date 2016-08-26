@@ -22,6 +22,7 @@ import play.api.mvc.EssentialFilter;
 import play.i18n.Messages;
 import play.mvc.Http;
 import play.mvc.Result;
+import uk.gov.hmrc.play.java.frontend.filters.WhitelistFilter;
 
 import java.util.Arrays;
 import java.util.Collections;
