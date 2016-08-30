@@ -17,6 +17,8 @@
 
 @import play.api.i18n._
 @import views.html.helper._
+@import views.html.helpers.labelWrap
+
 
 @elements = @{ new FieldElements(field.id, field, null, args.toMap, lang) }
 @fieldValue = @{ field.value match { case Some(x) => x case None => "" case x => x }}
@@ -27,11 +29,11 @@
     @elements.errors.map{error => <span class="error-notification">@Messages(error)</span>}
     @optionsList.map { case (value, label) =>
         @defining(s"${elements.field.name}-${value.toLowerCase.replace(" ","_")}") { inputId =>
-            <label class="@if(elements.args.get('_labelClass)){ @elements.args.get('_labelClass)}" for="@inputId">
+            @labelWrap('labelText -> label, '_modifierClass -> elements.args.get('_labelClass), 'for -> inputId) {
                 <input type="radio" id="@inputId"
                    @if(elements.args.get('_inputClass)){ class="@elements.args.get('_inputClass)" }
-                    name="@elements.field.name" value="true" @if(fieldValue==value){checked="checked"}/>@label
-            </label>
+                    name="@elements.field.name" value="true" @if(fieldValue==value){checked="checked"}/>
+            }
         }
     }
 </div>

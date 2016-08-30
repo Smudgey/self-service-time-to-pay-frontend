@@ -19,14 +19,14 @@ package uk.gov.hmrc.ssttp.models;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class EligibilityStep1DataTest {
+public class EligibilityDataTest {
 
     @Test
     public void GivenEligibilityStepOneData_WhenCreated_ThenItIsCreated() {
-        EligibilityStep1Data data = null;
+        EligibilityData data = null;
         Exception thrownEx = null;
         try {
-            data = new EligibilityStep1Data();
+            data = new EligibilityData();
         } catch (Exception e) {
             thrownEx = e;
         }
@@ -36,48 +36,48 @@ public class EligibilityStep1DataTest {
 
     @Test
     public void GivenEligibilityStepOneData_WhenCreatedWithTrueValues_ThenItIsCreatedWithTrueValues() {
-        EligibilityStep1Data data = null;
+        EligibilityData data = null;
         Exception thrownEx = null;
         try {
-            data = new EligibilityStep1Data(true, true, true);
+            data = new EligibilityData(true, true, true);
         } catch (Exception e) {
             thrownEx = e;
         }
         assertNull(thrownEx);
         assertNotNull(data);
 
-        assertTrue(data.HasSelfAssessmentDebt());
-        assertTrue(data.HasOtherTaxDebt());
-        assertTrue(data.HasExistingTTP());
+        assertTrue(data.isSelfAssessmentDebt());
+        assertTrue(data.isOtherTaxDebt());
+        assertTrue(data.isExistingTTP());
     }
 
     @Test
     public void GivenEligibilityStepOneData_WhenSelfAssessmentDebtSet_ThenValueIsCorrect() {
-        EligibilityStep1Data data = new EligibilityStep1Data();
+        EligibilityData data = new EligibilityData();
 
-        data.SetSelfAssessmentDebt(true);
-        assertTrue(data.HasSelfAssessmentDebt());
-        data.SetSelfAssessmentDebt(false);
-        assertFalse(data.HasSelfAssessmentDebt());
+        data.setSelfAssessmentDebt(true);
+        assertTrue(data.isSelfAssessmentDebt());
+        data.setSelfAssessmentDebt(false);
+        assertFalse(data.isSelfAssessmentDebt());
     }
 
     @Test
     public void GivenEligibilityStepOneData_WhenOtherTaxDebtSet_ThenValueIsCorrect() {
-        EligibilityStep1Data data = new EligibilityStep1Data();
+        EligibilityData data = new EligibilityData();
 
-        data.SetOtherTaxDebt(true);
-        assertTrue(data.HasOtherTaxDebt());
-        data.SetOtherTaxDebt(false);
-        assertFalse(data.HasOtherTaxDebt());
+        data.setOtherTaxDebt(true);
+        assertTrue(data.isOtherTaxDebt());
+        data.setOtherTaxDebt(false);
+        assertFalse(data.isOtherTaxDebt());
     }
 
     @Test
     public void GivenEligibilityStepOneData_WhenExistingTTPSet_ThenValueIsCorrect() {
-        EligibilityStep1Data data = new EligibilityStep1Data();
+        EligibilityData data = new EligibilityData();
 
-        data.SetExistingTTP(true);
-        assertTrue(data.HasExistingTTP());
-        data.SetExistingTTP(false);
-        assertFalse(data.HasExistingTTP());
+        data.setExistingTTP(true);
+        assertTrue(data.isExistingTTP());
+        data.setExistingTTP(false);
+        assertFalse(data.isExistingTTP());
     }
 }

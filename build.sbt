@@ -41,6 +41,7 @@ val testDependencies = Seq(
   "org.pegdown" % "pegdown" % "1.6.0",
   "org.jsoup" % "jsoup" % "1.8.1",
   "com.typesafe.play" %% "play-test" % PlayVersion.current,
+  "com.novocode" % "junit-interface" % "0.11",
   "com.github.tomakehurst" % "wiremock" % "1.58"
 ).map(d => d % Test)
 

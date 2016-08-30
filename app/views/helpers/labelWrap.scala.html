@@ -1,0 +1,28 @@
+@*
+Add a Label around some HTML as per Component Library:
+    http://hmrc.github.io/assets-frontend/section-label.html
+
+@param args options arguments for the template
+    'labelText          -> The text to use as the label
+    'for                -> Specify a value for the 'for' attribute
+    '_modifierClass     -> Add a modifier class to the label as documented in Component Library including:
+                            indent, bold,
+                            label--inline, label-inline--tight, label--inline-right,
+                            vertically-aligned-input, top-aligned-input
+                            block-label:hover, block-label--inline, block-label--inline-right, block-label--stacked,
+                            form-date,
+                            label--inlineRadio, label--inlineRadio--overhead, label--inlineRadio--overhead-wide, label--inlineRadio--expanded,
+                            label--inlineDropDown
+    '_labelAfter        -> Place label contents after label text if true (default is false).
+                             Note that this may not be needed in all cases depending on the modifierClass
+*@
+
+@(args:(Symbol, Any)*)(content:Html)
+@argsMap = @{ args.toMap }
+@after = @{argsMap.getOrElse('_labelAfter, false)==true }
+<label@if(argsMap.get('_modifierClass)){ class="@argsMap.get('_modifierClass)"}@if(argsMap.get('for)){ for="@argsMap.get('for)"}>
+    @if(after==false){@argsMap.getOrElse('labelText, "")}
+    @content
+    @if(after==true){@argsMap.getOrElse('labelText, "")}
+</label>
+

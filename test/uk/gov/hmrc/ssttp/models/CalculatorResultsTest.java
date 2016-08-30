@@ -14,15 +14,25 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ssttp.controllers;
+package uk.gov.hmrc.ssttp.models;
 
-import play.libs.F;
-import play.mvc.Result;
-import uk.gov.hmrc.play.java.frontend.controller.FrontendController;
-import views.html.landing;
+import org.junit.Test;
 
-public class LandingController extends FrontendController {
-    public static F.Promise<Result> landing() {
-        return F.Promise.pure(ok(landing.render()));
+import static org.junit.Assert.*;
+
+public class CalculatorResultsTest {
+
+    @Test
+    public void GivenCalculatorResults_WhenCreated_ThenItIsCreated() {
+        CalculatorResults results = null;
+        Exception thrownEx = null;
+        try {
+            results = new CalculatorResults();
+        } catch (Exception e) {
+            thrownEx = e;
+        }
+        assertNull(thrownEx);
+        assertNotNull(results);
     }
+
 }

@@ -1,6 +1,6 @@
 @import play.api.Play.current
 
-@(message: String)
+@()
 @import views.html.helpers.message_list
 @mainContent() = {
     <header class="page-header text">
@@ -20,7 +20,6 @@
         @Messages("ssttp.landing.contact.footer") @Messages("ssttp.landing.contact.number")
     </div>
 }
-
 
 @views.html.main(
     title = Messages("ssttp.common.title"),

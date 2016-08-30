@@ -24,16 +24,16 @@ import java.math.BigDecimal;
  * Created by Mark Paxton on 11/08/16.
  * DTO For step two of the SSTTP Eligibility wizard
  */
-public class EligibilityStep2Data {
+public class CalculatorInput {
     private BigDecimal _totalOwed;
     private LocalDate _dueDate;
     private BigDecimal _totalCanPay;
 
-    public EligibilityStep2Data() {
+    public CalculatorInput() {
 
     }
 
-    public EligibilityStep2Data(BigDecimal _totalOwed, LocalDate _dueDate, BigDecimal _totalCanPay) {
+    public CalculatorInput(BigDecimal _totalOwed, LocalDate _dueDate, BigDecimal _totalCanPay) {
         this._totalOwed = _totalOwed;
         this._dueDate = _dueDate;
         this._totalCanPay = _totalCanPay;

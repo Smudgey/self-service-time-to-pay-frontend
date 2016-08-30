@@ -19,31 +19,43 @@ package uk.gov.hmrc.ssttp.controllers;
 import play.libs.F;
 import play.mvc.Result;
 import uk.gov.hmrc.play.java.frontend.controller.FrontendController;
-import uk.gov.hmrc.ssttp.models.EligibilityStep1Data;
-import uk.gov.hmrc.ssttp.models.EligibilityStep2Data;
+import uk.gov.hmrc.ssttp.models.CalculatorInput;
+import uk.gov.hmrc.ssttp.models.EligibilityData;
 import play.data.Form;
-import views.html.eligibility.step_one;
-import views.html.eligibility.step_two;
+import views.html.eligibility.*;
 
 public class EligibilityController extends FrontendController {
 
-    public static F.Promise<Result> stepOne() {
-        Form<EligibilityStep1Data> form = Form.form(EligibilityStep1Data.class).bindFromRequest();
-        return F.Promise.promise(() -> ok(step_one.render(form, "")));
+    public static F.Promise<Result>  start() {
+        return F.Promise.promise(() -> redirect(routes.EligibilityController.stepOne()));
     }
 
-    public static Result stepOneSubmit() {
-        Form<EligibilityStep1Data> form = Form.form(EligibilityStep1Data.class).bindFromRequest();
-        return redirect(routes.EligibilityController.stepTwo());
+    public static F.Promise<Result> stepOne() {
+        Form<EligibilityData> form = Form.form(EligibilityData.class).bindFromRequest();
+        return F.Promise.promise(() -> ok(step_one.render(form)));
+    }
+
+    public static F.Promise<Result> stepOneSubmit() {
+        Form<EligibilityData> form = Form.form(EligibilityData.class).bindFromRequest();
+        System.out.println(form.data().toString());
+        System.out.println("Form has errors? " + form.hasErrors());
+        if (form.hasErrors()) {
+            form.errors().forEach((field, error) -> {
+                System.out.println("Form errors: " + field + ": " + error);
+            });
+            return F.Promise.promise(() -> ok(step_one.render(form)));
+        }else {
+            return F.Promise.promise(() -> redirect(routes.EligibilityController.stepTwo()));
+        }
     }
 
     public static F.Promise<Result> stepTwo() {
-        Form<EligibilityStep2Data> form = Form.form(EligibilityStep2Data.class).bindFromRequest();
+        Form<EligibilityData> form = Form.form(EligibilityData.class).bindFromRequest();
         return F.Promise.promise(() -> ok(step_two.render(form, "")));
     }
 
-    public static Result stepTwoSubmit() {
-        Form<EligibilityStep2Data> form = Form.form(EligibilityStep2Data.class).bindFromRequest();
-        return redirect(routes.EligibilityController.stepTwo());
+    public static F.Promise<Result>  stepTwoSubmit() {
+        Form<CalculatorInput> form = Form.form(CalculatorInput.class).bindFromRequest();
+        return F.Promise.promise(() -> redirect(routes.CalculatorController.form()));
     }
 }

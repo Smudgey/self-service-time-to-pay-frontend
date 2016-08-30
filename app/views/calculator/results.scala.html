@@ -1,0 +1,22 @@
+@*
+Time To Pay Calculator Results Display Page
+
+    @param results CalculatorResults The results data to display
+    @param args options arguments for the template
+*@
+
+@import uk.gov.hmrc.ssttp.models.CalculatorResults
+
+@(results:CalculatorResults)
+
+@mainContent() = {
+    <h3 style="heading-h3">Results</h3>
+}
+
+
+
+@views.html.main(
+title = Messages("ssttp.common.title"),
+bodyClasses = None,
+sidebarLinks = Some(landing_sidebar())
+)(mainContent)

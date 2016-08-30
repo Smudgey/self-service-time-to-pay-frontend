@@ -19,6 +19,8 @@ package uk.gov.hmrc.ssttp.controllers;
 import org.junit.Test;
 import play.i18n.Messages;
 import play.twirl.api.Content;
+import uk.gov.hmrc.ssttp.config.SsttpFrontendGlobal;
+
 import static play.test.Helpers.*;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -28,9 +30,18 @@ import static org.junit.Assert.assertThat;
 public class LandingControllerTest {
 
     @Test
-    public void renderTemplate() {
-        running(fakeApplication(), () -> {
-            Content html = views.html.landing.render("Self Service Time To Pay");
+    public void GivenLandingPageAndController_WhenLandingPageRendered_ThenTitleIsDispalyed() {
+        running(fakeApplication(new SsttpFrontendGlobal()), () -> {
+            Content html = views.html.landing.render();
+            assertThat(html.contentType(), is("text/html"));
+            assertThat(contentAsString(html), containsString(Messages.get("ssttp.landing.title")));
+        });
+    }
+
+    @Test
+    public void GivenLandingPageAndController_WhenLandingPageRendered_ThenIntroTextIsDispalyed() {
+        running(fakeApplication(new SsttpFrontendGlobal()), () -> {
+            Content html = views.html.landing.render();
             assertThat(html.contentType(), is("text/html"));
             assertThat(contentAsString(html), containsString(Messages.get("ssttp.landing.intro")));
         });

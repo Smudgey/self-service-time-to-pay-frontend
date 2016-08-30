@@ -14,15 +14,10 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ssttp.controllers;
+package uk.gov.hmrc.ssttp.models;
 
-import play.libs.F;
-import play.mvc.Result;
-import uk.gov.hmrc.play.java.frontend.controller.FrontendController;
-import views.html.landing;
-
-public class LandingController extends FrontendController {
-    public static F.Promise<Result> landing() {
-        return F.Promise.pure(ok(landing.render()));
-    }
+/**
+ * Created by mark on 16/08/16.
+ */
+public class CalculatorResults {
 }

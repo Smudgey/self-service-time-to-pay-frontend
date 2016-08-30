@@ -22,14 +22,14 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class EligibilityStep2DataTest {
+public class CalculatorInputTest {
 
     @Test
     public void GivenEligibilityStepTwoData_WhenCreated_ThenItIsCreated() {
-        EligibilityStep2Data data = null;
+        CalculatorInput data = null;
         Exception thrownEx = null;
         try {
-            data = new EligibilityStep2Data();
+            data = new CalculatorInput();
         } catch (Exception e) {
             thrownEx = e;
         }
@@ -39,10 +39,10 @@ public class EligibilityStep2DataTest {
 
     @Test
     public void GivenEligibilityStepTwoData_WhenCreatedWithValues_ThenItIsCreatedWithValues() {
-        EligibilityStep2Data data = null;
+        CalculatorInput data = null;
         Exception thrownEx = null;
         try {
-            data = new EligibilityStep2Data(new BigDecimal(1000), new LocalDate(2016, 1, 30), new BigDecimal(100));
+            data = new CalculatorInput(new BigDecimal(1000), new LocalDate(2016, 1, 30), new BigDecimal(100));
         } catch (Exception e) {
             thrownEx = e;
         }
@@ -56,7 +56,7 @@ public class EligibilityStep2DataTest {
 
     @Test
     public void GivenEligibilityStepTwoData_WhenTotalOwedSet_ThenValueIsCorrect() {
-        EligibilityStep2Data data = new EligibilityStep2Data();
+        CalculatorInput data = new CalculatorInput();
 
         data.SetTotalOwed(new BigDecimal(9999.99));
         assertEquals(new BigDecimal(9999.99), data.GetTotalOwed());
@@ -66,7 +66,7 @@ public class EligibilityStep2DataTest {
 
     @Test
     public void GivenEligibilityStepTwoData_WhenDueDateSet_ThenValueIsCorrect() {
-        EligibilityStep2Data data = new EligibilityStep2Data();
+        CalculatorInput data = new CalculatorInput();
 
         data.SetDueDate(new LocalDate(2017, 6, 30));
         assertEquals(new LocalDate(2017, 6, 30), data.GetDueDate());
@@ -76,7 +76,7 @@ public class EligibilityStep2DataTest {
 
     @Test
     public void GivenEligibilityStepTwoData_WhenTotalCanPaySet_ThenValueIsCorrect() {
-        EligibilityStep2Data data = new EligibilityStep2Data();
+        CalculatorInput data = new CalculatorInput();
 
         data.SetTotalCanPay(new BigDecimal(9999.13));
         assertEquals(new BigDecimal(9999.13), data.GetTotalCanPay());
