@@ -20,7 +20,8 @@ import play.libs.F;
 import play.mvc.Result;
 import uk.gov.hmrc.play.java.frontend.controller.FrontendController;
 import uk.gov.hmrc.ssttp.models.CalculatorInput;
-import uk.gov.hmrc.ssttp.models.EligibilityData;
+import uk.gov.hmrc.ssttp.models.EligibilityDebtTypeData;
+import uk.gov.hmrc.ssttp.models.EligibilityExistingTTPData;
 import play.data.Form;
 import views.html.eligibility.*;
 
@@ -31,18 +32,13 @@ public class EligibilityController extends FrontendController {
     }
 
     public static F.Promise<Result> stepOne() {
-        Form<EligibilityData> form = Form.form(EligibilityData.class).bindFromRequest();
+        Form<EligibilityDebtTypeData> form = Form.form(EligibilityDebtTypeData.class);
         return F.Promise.promise(() -> ok(step_one.render(form)));
     }
 
     public static F.Promise<Result> stepOneSubmit() {
-        Form<EligibilityData> form = Form.form(EligibilityData.class).bindFromRequest();
-        System.out.println(form.data().toString());
-        System.out.println("Form has errors? " + form.hasErrors());
+        Form<EligibilityDebtTypeData> form = Form.form(EligibilityDebtTypeData.class).bindFromRequest();
         if (form.hasErrors()) {
-            form.errors().forEach((field, error) -> {
-                System.out.println("Form errors: " + field + ": " + error);
-            });
             return F.Promise.promise(() -> ok(step_one.render(form)));
         }else {
             return F.Promise.promise(() -> redirect(routes.EligibilityController.stepTwo()));
@@ -50,12 +46,18 @@ public class EligibilityController extends FrontendController {
     }
 
     public static F.Promise<Result> stepTwo() {
-        Form<EligibilityData> form = Form.form(EligibilityData.class).bindFromRequest();
-        return F.Promise.promise(() -> ok(step_two.render(form, "")));
+        Form<EligibilityExistingTTPData> form = Form.form(EligibilityExistingTTPData.class);
+        return F.Promise.promise(() -> ok(step_two.render(form)));
     }
 
-    public static F.Promise<Result>  stepTwoSubmit() {
-        Form<CalculatorInput> form = Form.form(CalculatorInput.class).bindFromRequest();
-        return F.Promise.promise(() -> redirect(routes.CalculatorController.form()));
+
+    public static F.Promise<Result> stepTwoSubmit() {
+        Form<EligibilityExistingTTPData> form = Form.form(EligibilityExistingTTPData.class).bindFromRequest();
+        if (form.hasErrors()) {
+            return F.Promise.promise(() -> ok(step_two.render(form)));
+        } else {
+            return F.Promise.promise(() -> redirect(routes.CalculatorController.form()));
+        }
     }
+
 }

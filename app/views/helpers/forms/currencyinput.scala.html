@@ -22,8 +22,8 @@ Text input field using Component Library Styles as  documented:
 
 @argsMap = @{ args.toMap }
 @elements = @{ new FieldElements(field.id, field, null, argsMap, lang) }
+
 @value = @{ field.value match { case Some(x) => x case None => "" case x => x }}
-@inputClass = @{}
 
 @labelWrap('labelText -> argsMap.getOrElse('label, ""), 'for -> elements.field.name, '_after -> "true", '_modifierClass -> argsMap.get('_labelClass)) {
     @if(!elements.args.contains('_hideErrors)) {
