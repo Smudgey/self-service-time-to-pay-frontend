@@ -34,7 +34,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static play.test.Helpers.*;
 
-public class SsttpFrontendGlobalTest extends SsttpFrontendGlobal {
+public class FrontendGlobalTest extends FrontendGlobal {
     private Http.RequestHeader rh = mock(Http.RequestHeader.class);
     private int futureTimeout = 3000;
 
@@ -82,7 +82,7 @@ public class SsttpFrontendGlobalTest extends SsttpFrontendGlobal {
 
     @Test
     public void renderNotFoundWithServer() {
-        SsttpFrontendGlobal minusWhitelist = new SsttpFrontendGlobal() {
+        FrontendGlobal minusWhitelist = new FrontendGlobal() {
             @Override
             public <T extends EssentialFilter> Class<T>[] filters() {
                 return (Class[]) Arrays.stream(super.filters()).filter(f -> !f.isAssignableFrom(WhitelistFilter.class)).toArray(size -> new Class[size]);
