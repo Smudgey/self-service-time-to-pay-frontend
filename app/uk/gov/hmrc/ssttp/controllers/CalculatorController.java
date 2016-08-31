@@ -42,5 +42,4 @@ public class CalculatorController extends FrontendController {
         CalculatorResults calc_results = new CalculatorResults();
         return F.Promise.promise(() -> ok(results.render(calc_results)));
     }
-
 }
