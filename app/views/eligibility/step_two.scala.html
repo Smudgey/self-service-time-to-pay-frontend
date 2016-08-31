@@ -1,6 +1,6 @@
-@import uk.gov.hmrc.ssttp.models.EligibilityData
+@import uk.gov.hmrc.ssttp.models.EligibilityExistingTTPData
 
-@(dataForm: Form[EligibilityData])(implicit message: String)
+@(dataForm: Form[EligibilityExistingTTPData])
 
 @import views.html.helpers._
 @import views.html.helpers.forms._
@@ -24,19 +24,17 @@
         @Messages("ssttp.eligibility.form.intro")
     </div>
     @form(routes.EligibilityController.stepTwoSubmit(), 'class -> "group") {
-        @fieldset('_modifierClass -> "form-field-group") {
-            @radiobuttons(dataForm("existingTTP"), Seq(
-                "true" ->  Messages("ssttp.eligibility.form.existing_ttp.question.yes"),
-                "false" -> Messages("ssttp.eligibility.form.existing_ttp.question.no")
-            ),
-                '_label -> Html(Messages("ssttp.eligibility.form.existing_ttp.question")),
-                '_groupClass -> "form-field",
-                '_labelClass -> "block-label block-label--inline"
-            ) {
-                <h3 class="h3-heading">@Messages("ssttp.eligibility.form.existing_ttp.question.prompt")</h3>
-            }
-            @submit(Messages("ssttp.eligibility.form.continue"))
-            }
+      @radiobuttons(dataForm("existingTTP"), Seq(
+          "true" ->  Messages("ssttp.eligibility.form.existing_ttp.question.yes"),
+          "false" -> Messages("ssttp.eligibility.form.existing_ttp.question.no")
+      ),
+          '_label -> Html(Messages("ssttp.eligibility.form.existing_ttp.question")),
+          '_groupClass -> "form-field",
+          '_labelClass -> "block-label block-label--inline"
+      ) {
+          <h3 class="h3-heading">@Messages("ssttp.eligibility.form.existing_ttp.question.prompt")</h3>
+      }
+      @submit(Messages("ssttp.eligibility.form.continue"))
     }
     @tabs(Seq(
         (Messages("ssttp.eligibility.form.continue-before.tab.title"), tab1Content),

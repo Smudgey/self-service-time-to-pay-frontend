@@ -19,4 +19,6 @@ dist
 *.iws
 .DS_Store
 **/*.DS_Store
-    
+/.ensime
+/.ensime_cache
+build.sublime-workspace     

@@ -42,7 +42,7 @@ ssttp.eligibility.form.other_ways.tab.intro=If you need more time to pay your de
 ssttp.eligibility.form.other_ways.tab.text=Contact HM Revenue and Customs (HMRC) as soon as possible if you can’t pay all your tax on time.
 
 ssttp.eligibility.form.debt_type.required=You need to tell us what kind of tax you owe
-
+ssttp.eligibility.form.existing_ttp.required=You need to tell us if you are already paying in instalments
 
 ssttp.calculator.form.title=Pay a tax debt in instalments
 ssttp.calculator.form.how_much.question=How much do you owe?

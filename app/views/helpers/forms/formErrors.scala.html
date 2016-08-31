@@ -1,0 +1,21 @@
+@*
+Dispay the errors for a whole form, or a specified field/group
+
+    @param theForm: Form[_] The form to display errors from 
+    @param theField: String If specified show only the errors for this field/group name
+    @param args options arguments for the template
+*@
+@(theForm: Form[_], theField:String = "")
+@{
+  var errors:Seq[String] = null;
+  if (theField.isEmpty && theForm.hasGlobalErrors) {
+    errors = theForm.globalErrors.map { _.message() }
+  }
+  else if (theForm.errors.containsKey(theField) && theForm.errors.get(theField).nonEmpty) {
+    errors = theForm.errors.get(theField).map {_.message()}
+  }
+  if(errors != null) {
+    errorList(errors.map(Messages(_)))
+  }
+}
+
