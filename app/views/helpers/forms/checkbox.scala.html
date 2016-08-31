@@ -19,9 +19,7 @@
 @elements = @{ new FieldElements(field.id, field, null, args.toMap, lang) }
 @value = @{ field.value match { case Some(x) => x case None => "false" case x => x }}
 <div class="form-field@if(elements.args.get('_modifierClass)){@elements.args.get('_modifierClass)}">
-    @elements.errors(elements.lang).map { error =>
-    <span style="display: block" class="error-notification">@Messages(error)</span>
-    }
+    @fieldErrors(field)
     @labelWrap('labelText -> label.getOrElse(""), '_modifierClass -> elements.args.get('_labelClass), 'for -> elements.id) {
         <input type="checkbox" id="@elements.id"
            @if( elements.args.get('_inputClass) ){ class="@elements.args.get('_inputClass)" }

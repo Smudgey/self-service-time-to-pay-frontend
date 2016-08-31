@@ -1,0 +1,10 @@
+
+@*
+Format a list of error messages for the given list
+
+    @param errors Seq[String] of error messages
+    @param args options arguments for the template
+*@
+@(errors:Seq[String])
+@Html(errors.map { m => <span class="error-notification">{m}</span> }.mkString(""))
+

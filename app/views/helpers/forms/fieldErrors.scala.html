@@ -1,0 +1,12 @@
+
+@*
+Dispay the errors for given field
+
+    @param theForm: Form[_] The form to display errors from 
+    @param theField: String If specified show only the errors for this field/group name
+    @param args options arguments for the template
+*@
+@(field:Field, args:(Symbol, String)*)
+@import play.api.data.FormError
+@errorList(field.errors.map { m:FormError => Messages(m.message) }) 
+
