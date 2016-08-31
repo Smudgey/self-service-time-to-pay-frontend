@@ -22,12 +22,13 @@ ssttp.landing.contact.footer=Once you’ve got all of this information, please c
 ssttp.landing.contact.number=00000 0000000
 
 #eligibility calculator
-ssttp.eligibility.form.title=Pay a tax debt in instalments
 ssttp.eligibility.form.intro=If you can''t pay a tax debt on time, you might be able to pay it in instalments.
+ssttp.eligibility.form.debt_type.title=Type of tax
 ssttp.eligibility.form.debt_type.question.prompt=Is your debt for:
 ssttp.eligibility.form.debt_type.question.hint=Choose one or both
 ssttp.eligibility.form.debt_type.question.self-assessment=Self Assessment
 ssttp.eligibility.form.debt_type.question.other=Other types of tax
+ssttp.eligibility.form.existing_ttp.title=Existing instalment plans
 ssttp.eligibility.form.existing_ttp.question.prompt=Are you already paying an HMRC debt in instalments?
 ssttp.eligibility.form.existing_ttp.question.yes=Yes
 ssttp.eligibility.form.existing_ttp.question.no=No
@@ -44,7 +45,7 @@ ssttp.eligibility.form.other_ways.tab.text=Contact HM Revenue and Customs (HMRC)
 ssttp.eligibility.form.debt_type.required=You need to tell us what kind of tax you owe
 ssttp.eligibility.form.existing_ttp.required=You need to tell us if you are already paying in instalments
 
-ssttp.calculator.form.title=Pay a tax debt in instalments
+ssttp.calculator.form.title=About the debt
 ssttp.calculator.form.how_much.question=How much do you owe?
 ssttp.calculator.form.when_due.question=When is it due?
 ssttp.calculator.form.pay_now_amount.question=How much can you pay now?

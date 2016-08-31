@@ -20,9 +20,9 @@
 @value = @{ field.value match { case Some(x) => x case None => "false" case x => x }}
 <div class="form-field@if(elements.args.get('_modifierClass)){@elements.args.get('_modifierClass)}">
     @fieldErrors(field)
-    @labelWrap('labelText -> label.getOrElse(""), '_modifierClass -> elements.args.get('_labelClass), 'for -> elements.id) {
+    @labelWrap('labelText -> label.getOrElse(""), '_modifierClass -> elements.args.get('_labelClass), 'for -> elements.id){
         <input type="checkbox" id="@elements.id"
            @if( elements.args.get('_inputClass) ){ class="@elements.args.get('_inputClass)" }
             name="@elements.field.name" value="true" @if(value=="true"){checked="checked"}/>
-    }
+   }
 </div>

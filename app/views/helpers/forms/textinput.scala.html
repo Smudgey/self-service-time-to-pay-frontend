@@ -24,13 +24,12 @@ Text input field using Component Library Styles as  documented:
 @elements = @{ new FieldElements(field.id, field, null, argsMap, lang) }
 @value = @{ field.value match { case Some(x) => x case None => "" case x => x }}
 
-@labelWrap('labelText -> argsMap.getOrElse('label, ""), 'for -> elements.field.name, '_modifierClass -> argsMap.get('_labelClass)) {
+@labelWrap('labelText -> argsMap.getOrElse('label, ""), 'for -> elements.field.name, '_modifierClass -> argsMap.get('_labelClass)){
     <input type="text"
         @if( elements.args.contains('_dataAttributes) ){ @elements.args.get('_dataAttributes)}
         @if( elements.args.get('_modifierClass) ){ class="@elements.args.get('_modifierClass)" }
         @if( elements.args.get('_autoComplete) ){ autocomplete="@elements.args.get('_autoComplete)" }
-        name="@elements.field.name" id="@elements.field.name"
-        value="@value"
+        name="@elements.field.name" id="@elements.field.name" value="@value"
         @if(elements.args.get('_error_id).isDefined) { aria-labeledby="@elements.args.get('_error_id)" }
         @if(elements.args.get('_hintId).isDefined) { aria-describedby="@elements.args.get('_hintId)" }
         @if(elements.args.get('_maxlength).isDefined) { maxlength="@elements.args.get('_maxlength)" }

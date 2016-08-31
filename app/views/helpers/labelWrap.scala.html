@@ -15,13 +15,9 @@ Add a Label around some HTML as per Component Library:
                             label--inlineDropDown
     
 *@
-
-@(args:(Symbol, Any)*)(beforeContent:Html= Html(""), afterContent:Function0[Html] = { () => Html("") })
+@(args:(Symbol, Any)*)(content: => Html = Html(""))
 @argsMap = @{ args.toMap }
-
 <label@if(argsMap.get('_modifierClass)){ class="@argsMap.get('_modifierClass)"}@if(argsMap.get('for)){ for="@argsMap.get('for)"}>
-    @beforeContent
     @argsMap.getOrElse('labelText, "")
-    @afterContent()
+    @content
 </label>
-

@@ -5,25 +5,31 @@
 @import views.html.helpers.forms._
 @import uk.gov.hmrc.ssttp.controllers.routes
 
-@mainContent() = {
-
-<header class="page-header text">
-        <h1 class="h1-heading">@Messages("ssttp.calculator.form.title")</h1>
-    </header>
-    @form(routes.CalculatorController.submit(), 'class -> "group") {
-        @textinput(dataForm("totalOwed"), 'label -> Messages("ssttp.calculator.form.how_much.question"),
-            '_labelClass -> "label--inline", 'inputClass -> "sidebar")
-        @textinput(dataForm("whenDue"), 'label -> Messages("ssttp.calculator.form.when_due.question"),
-            '_labelClass -> "label--inline")
-        @currencyinput(dataForm("totalCanPay"), 'label -> Messages("ssttp.calculator.form.pay_now_amount.question"),
-            '_labelClass -> "label--inline")
-        @submit(Messages("ssttp.calculator.form.continue"))
-    }
-    <p>@Messages("ssttp.calculator.form.back")</p>
-}
 
 @views.html.main(
     title = Messages("ssttp.common.title"),
     bodyClasses = None,
     sidebarLinks = Some(landing_sidebar())
-)(mainContent)
+){
+  <header class="page-header text">
+    <h1 class="h1-heading">@Messages("ssttp.calculator.form.title")</h1>
+  </header>
+  @form(routes.CalculatorController.submit(), 'class -> "group") {
+    <p>
+      @currencyinput(dataForm("totalOwed"), 
+        'label -> Messages("ssttp.calculator.form.how_much.question"),
+        '_labelClass -> "label--inline grid-layout",
+        '_inputClass -> "input--small input--no-spinner",
+        '_modifierClass -> "grid-layout__column--1-4 sidebar sidebar--sm")
+    </p>
+    <p>
+      @currencyinput(dataForm("totalCanPay"), 
+        'label -> Messages("ssttp.calculator.form.pay_now_amount.question"),
+        '_labelClass -> "label--inline grid-layout",
+        '_inputClass -> "input--small input--no-spinner",
+        '_modifierClass -> "grid-layout__column--1-4 sidebar sidebar--sm")
+     </p>
+    @submit(Messages("ssttp.calculator.form.continue"))
+  }
+  <p>@Messages("ssttp.calculator.form.back")</p>
+}
