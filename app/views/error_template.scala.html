@@ -1,6 +1,6 @@
 @(pageTitle: String, heading: String, message: String)
 
-@import uk.gov.hmrc.ssttp.config.SsttpFrontendConfig
+@import uk.gov.hmrc.ssttp.config.FrontendConfig
 
 
 @contentHeader = {
@@ -11,4 +11,4 @@
   <p>@message</p>
 }
 
-@govuk_wrapper(appConfig = new SsttpFrontendConfig(),title = pageTitle, contentHeader = Some(contentHeader), mainContent = mainContent)
+@govuk_wrapper(appConfig = new FrontendConfig(),title = pageTitle, contentHeader = Some(contentHeader), mainContent = mainContent)

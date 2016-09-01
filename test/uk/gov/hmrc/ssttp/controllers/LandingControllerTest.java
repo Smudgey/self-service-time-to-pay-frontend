@@ -19,7 +19,7 @@ package uk.gov.hmrc.ssttp.controllers;
 import org.junit.Test;
 import play.i18n.Messages;
 import play.twirl.api.Content;
-import uk.gov.hmrc.ssttp.config.SsttpFrontendGlobal;
+import uk.gov.hmrc.ssttp.config.FrontendGlobal;
 
 import static play.test.Helpers.*;
 
@@ -31,7 +31,7 @@ public class LandingControllerTest {
 
     @Test
     public void GivenLandingPageAndController_WhenLandingPageRendered_ThenTitleIsDispalyed() {
-        running(fakeApplication(new SsttpFrontendGlobal()), () -> {
+        running(fakeApplication(new FrontendGlobal()), () -> {
             Content html = views.html.landing.render();
             assertThat(html.contentType(), is("text/html"));
             assertThat(contentAsString(html), containsString(Messages.get("ssttp.landing.title")));
@@ -40,7 +40,7 @@ public class LandingControllerTest {
 
     @Test
     public void GivenLandingPageAndController_WhenLandingPageRendered_ThenIntroTextIsDispalyed() {
-        running(fakeApplication(new SsttpFrontendGlobal()), () -> {
+        running(fakeApplication(new FrontendGlobal()), () -> {
             Content html = views.html.landing.render();
             assertThat(html.contentType(), is("text/html"));
             assertThat(contentAsString(html), containsString(Messages.get("ssttp.landing.intro")));

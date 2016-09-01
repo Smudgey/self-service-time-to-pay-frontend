@@ -24,7 +24,7 @@ import play.mvc.Http;
 import play.mvc.Result;
 import play.test.FakeRequest;
 import play.twirl.api.Content;
-import uk.gov.hmrc.ssttp.config.SsttpFrontendGlobal;
+import uk.gov.hmrc.ssttp.config.FrontendGlobal;
 
 import java.util.Collections;
 import java.util.Map;
@@ -54,7 +54,7 @@ public class EligibilityControllerTest {
 
     @Test
     public void GivenEligibilityController_WhenPageOneRendered_ThenTitleIsDispalyed() {
-        running(fakeApplication(new SsttpFrontendGlobal()), () -> {
+        running(fakeApplication(new FrontendGlobal()), () -> {
             //Content html = views.html.eligibility.step_one.render();
             //assertThat(html.contentType(), is("text/html"));
             //assertThat(contentAsString(html), containsString(Messages.get("ssttp.landing.title")));
@@ -63,7 +63,7 @@ public class EligibilityControllerTest {
 
     @Test
     public void GivenEligibilityController_WhenPageOneRendered_ThenIntroTextIsDispalyed() {
-        running(fakeApplication(new SsttpFrontendGlobal()), () -> {
+        running(fakeApplication(new FrontendGlobal()), () -> {
             Result r = EligibilityController.stepOne().get(3000);
             StringBuffer b = new StringBuffer();
             b.append(r.toScala().body());
